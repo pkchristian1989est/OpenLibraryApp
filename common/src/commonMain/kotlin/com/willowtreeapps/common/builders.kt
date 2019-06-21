@@ -1,16 +1,13 @@
 package com.willowtreeapps.common
 
 import com.willowtreeapps.common.ui.SearchView
-import com.willowtreeapps.common.ui.View
-import com.willowtreeapps.common.ui.ViewUpdater
-import com.willowtreeapps.common.ui.ViewUpdaterBuilder
 import org.reduxkotlin.Store
 import org.reduxkotlin.StoreSubscriber
-import org.reduxkotlin.compose
 import org.reduxkotlin.createStore
-import kotlin.reflect.KClass
 import kotlin.reflect.KProperty1
 
+typealias ViewUpdater<View> = (View) -> (Store) -> StoreSubscriber
+typealias ViewUpdaterBuilder<State, View> = ((View.() -> ((SelectorSubscriberBuilder<State, View>.() -> Unit))))
 class SelectorSubscriberBuilder<S : Any, View>(val store: Store) {
     //available to lambda with receiver in DSL
     val state: S

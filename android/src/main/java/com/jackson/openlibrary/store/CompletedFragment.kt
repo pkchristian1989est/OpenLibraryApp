@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jackson.openlibrary.OpenLibraryApp
 import com.jackson.openlibrary.R
+import com.willowtreeapps.common.Actions
 import com.willowtreeapps.common.BookListItemViewState
 import com.willowtreeapps.common.ui.CompletedPresenter
 import com.willowtreeapps.common.ui.CompletedView
@@ -18,11 +19,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
 
-class CompletedFragment : BaseLibraryViewFragment<CompletedPresenter?>(), CoroutineScope, CompletedView {
+class CompletedFragment : BaseLibraryViewFragment(), CoroutineScope, CompletedView {
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main
 
-    override var presenter: CompletedPresenter? = null
     private val adapter = BooksAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -38,7 +38,7 @@ class CompletedFragment : BaseLibraryViewFragment<CompletedPresenter?>(), Corout
     override fun onResume() {
         super.onResume()
         OpenLibraryApp.gameEngine().attachView(this)
-        presenter?.loadBooks()
+        dispatch(Actions.LoadCompleted())
     }
 
     override fun onPause() {

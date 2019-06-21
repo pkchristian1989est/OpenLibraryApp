@@ -2,7 +2,7 @@ package com.willowtreeapps.common.ui
 
 import com.willowtreeapps.common.BookListItemViewState
 
-interface CompletedView : View<CompletedPresenter?> {
+interface CompletedView : View {
     fun showLoading()
     fun hideLoading()
     fun showError(msg: String)
